@@ -1,0 +1,19 @@
+<div class="loginForm">
+  <p class="loginFormTitle"><b>Log In</b></p>
+
+  <form (ngSubmit)="validate()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="email"><b>Email:</b></label>
+      <input type="text" id="email" name="email" [(ngModel)]="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="pwd"><b>Password:</b></label>
+      <input type="password" id="pwd" name="pwd" [(ngModel)]="pwd" required />
+    </div>
+
+    <button type="submit" [disabled]="!loginForm.valid">Log In</button>
+  </form>
+
+  <p style="margin-top: 1rem;">Need an account? <a routerLink="/register">Register</a></p>
+</div>

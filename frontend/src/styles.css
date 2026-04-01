@@ -1,1 +1,125 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #313338;
+  color: #dbdee1;
+  font-family: 'gg sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+p {
+  color: #b5bac1;
+  margin-bottom: 1rem;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.register-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 2rem;
+  background-color: #2b2d31;
+  border-radius: 8px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #b5bac1;
+}
+
+input {
+  padding: 0.6rem;
+  background-color: #1e1f22;
+  border: 1px solid #1e1f22;
+  border-radius: 4px;
+  color: #dbdee1;
+  font-size: 1rem;
+  outline: none;
+}
+
+input:focus {
+  border-color: #5865f2;
+}
+
+.btn, button[type="submit"] {
+  padding: 0.7rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #5865f2;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:hover, button[type="submit"]:hover {
+  background-color: #4752c4;
+}
+
+button:disabled {
+  background-color: #4752c4;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #ed4245;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.loginForm {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 2rem;
+  background-color: #2b2d31;
+  border-radius: 8px;
+}
+
+.loginFormTitle {
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
