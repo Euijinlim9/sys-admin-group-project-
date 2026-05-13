@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,10 @@ export class Register {
     confirmPassword: ''
   };
 
+  constructor(private router: Router) {}
+
   onSubmit() {
     console.log('Registered:', this.user);
+    this.router.navigate(['/chat']);
   }
 }
