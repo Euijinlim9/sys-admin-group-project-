@@ -1,0 +1,119 @@
+<div class="chat-layout">
+
+  <!-- Far-left icon rail -->
+  <nav class="icon-rail">
+    <!-- DMs button -->
+    <div class="rail-icon" [class.active]="view === 'dm'" (click)="switchToDm()" title="Direct Messages">
+      💬
+    </div>
+
+    <div class="rail-divider"></div>
+
+    <!-- My Server -->
+    <div class="rail-icon" [class.active]="view === 'server'" (click)="switchToServer()" title="My Server">
+      MS
+    </div>
+  </nav>
+
+  <!-- Left Sidebar -->
+  <aside class="sidebar">
+    <!-- SERVER VIEW -->
+    <ng-container *ngIf="view === 'server'">
+      <div class="server-name">My Server</div>
+      <div class="channel-list">
+        <p class="channel-category">TEXT CHANNELS</p>
+        <div
+          *ngFor="let ch of channels"
+          class="channel-item"
+          [class.active]="ch.name === activeChannel && !showSettings"
+          (click)="selectChannel(ch.name)"
+        >
+          <span class="hash">#</span> {{ ch.name }}
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- DM VIEW -->
+    <ng-container *ngIf="view === 'dm'">
+      <div class="server-name">Direct Messages</div>
+      <div class="channel-list">
+        <p class="channel-category">Messages</p>
+        <div *ngIf="dms.length === 0" class="empty-sidebar">No DMs yet</div>
+        <div
+          *ngFor="let dm of dms"
+          class="channel-item"
+          [class.active]="dm.user === activeDm && !showSettings"
+          (click)="selectDm(dm.user)"
+        >
+          <div class="dm-avatar">{{ dm.user[0] }}</div> {{ dm.user }}
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- User bar (always visible) -->
+    <div class="user-bar">
+      <div class="avatar">{{ currentUser[0] }}</div>
+      <span class="username">{{ currentUser }}</span>
+      <span class="settings-icon" (click)="openSettings()" title="Settings">⚙</span>
+    </div>
+  </aside>
+
+  <!-- Main Area -->
+  <main class="chat-main">
+    <div class="chat-header">
+      <span *ngIf="!showSettings && view === 'server'" class="hash">#</span>
+      <span *ngIf="!showSettings && view === 'dm' && activeDm">@</span>
+      {{ headerLabel }}
+    </div>
+
+    <!-- Settings Panel -->
+    <div *ngIf="showSettings" class="settings-panel">
+      <h2>Settings</h2>
+      <div class="settings-section">
+        <p class="settings-label">USERNAME</p>
+        <input type="text" [(ngModel)]="currentUser" placeholder="Username" />
+      </div>
+      <div class="settings-section">
+        <p class="settings-label">EMAIL</p>
+        <input type="text" placeholder="email@example.com" />
+      </div>
+      <div class="settings-section">
+        <p class="settings-label">PASSWORD</p>
+        <input type="password" placeholder="••••••••" />
+      </div>
+      <button class="save-btn">Save Changes</button>
+    </div>
+
+    <!-- Messages -->
+    <ng-container *ngIf="!showSettings">
+      <div class="messages">
+        <div *ngIf="view === 'dm' && !activeDm" class="empty-channel">
+          Select a DM to start chatting.
+        </div>
+        <ng-container *ngIf="view !== 'dm' || activeDm">
+          <div *ngFor="let msg of activeMessages" class="message">
+            <div class="msg-avatar">{{ msg.author[0] }}</div>
+            <div class="msg-body">
+              <span class="msg-author">{{ msg.author }}</span>
+              <span class="msg-time">{{ msg.time }}</span>
+              <p class="msg-text">{{ msg.text }}</p>
+            </div>
+          </div>
+          <div *ngIf="activeMessages.length === 0" class="empty-channel">
+            No messages yet. Say something!
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="message-input-bar" *ngIf="view !== 'dm' || activeDm">
+        <input
+          type="text"
+          [(ngModel)]="messageInput"
+          (keydown)="onKeyDown($event)"
+          placeholder="Message {{ headerLabel }}"
+        />
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </ng-container>
+  </main>
+</div>
